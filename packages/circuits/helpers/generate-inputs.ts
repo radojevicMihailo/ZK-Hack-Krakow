@@ -14,6 +14,7 @@ export type IActivityCircuitInputs = {
   emailBodyLength?: string | undefined;
   precomputedSHA?: string[] | undefined;
   bodyHashIndex?: string | undefined;
+  old_activity_score: string;
 };
 
 export async function generateActivityVerifierCircuitInputs(
@@ -30,10 +31,12 @@ export async function generateActivityVerifierCircuitInputs(
     Buffer.from(bodyRemaining).indexOf(selectorBuffer) + selectorBuffer.length;
 
   const address = bytesToBigInt(fromHex(ethereumAddress)).toString();
+  const old_activity_score = 50;
 
   return {
     ...emailVerifierInputs,
     activityIndex: activityIndex.toString(),
     address,
+    old_activity_score: old_activity_score.toString(),
   };
 }

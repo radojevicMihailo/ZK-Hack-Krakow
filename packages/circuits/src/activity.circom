@@ -23,7 +23,6 @@ template ActivityVerifier(maxHeadersLength, maxBodyLength, n, k, exposeFrom) {
 
     signal output pubkeyHash;
     signal output new_activity_score;
-    signal output profit;
 
 
     component EV = EmailVerifier(maxHeadersLength, maxBodyLength, n, k, 0);
