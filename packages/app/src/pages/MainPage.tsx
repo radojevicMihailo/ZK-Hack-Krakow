@@ -417,7 +417,7 @@ export const MainPage: React.FC<{}> = (props) => {
               : !write
               ? "Connect Wallet first, scroll to top!"
               : verificationPassed
-              ? "Mint Twitter badge on-chain"
+              ? "Mint PoA badge on-chain"
               : "Verify first, before minting on-chain!"}
           </Button>
           {isSuccess && (

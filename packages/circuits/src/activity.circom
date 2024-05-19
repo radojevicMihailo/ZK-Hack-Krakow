@@ -18,7 +18,7 @@ template ActivityVerifier(maxHeadersLength, maxBodyLength, n, k, exposeFrom) {
     signal input bodyHashIndex;
     signal input precomputedSHA[32];
     signal input activityIndex;
-    signal input address; // we don't need to constrain the + 1 due to https://geometry.xyz/notebook/groth16-malleability
+    signal input address;
     signal input old_activity_score;
 
     signal output pubkeyHash;
