@@ -1,4 +1,4 @@
-# Proof of Actiivty
+# Proof of Activity
 
 ## How it works
 
