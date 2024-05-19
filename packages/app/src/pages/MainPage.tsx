@@ -15,8 +15,8 @@ import {
 } from "@zk-email/helpers/dist/zkp";
 import { abi } from "../abi.json";
 import {
-  generateTwitterVerifierCircuitInputs,
-  ITwitterCircuitInputs,
+  generateActivityVerifierCircuitInputs,
+  IActivityCircuitInputs,
 } from "@proof-of-twitter/circuits/helpers";
 import { LabeledTextArea } from "../components/LabeledTextArea";
 import DragAndDropTextBox from "../components/DragAndDropTextBox";
@@ -27,7 +27,7 @@ import { NumberedStep } from "../components/NumberedStep";
 import { TopBanner } from "../components/TopBanner";
 import { ProgressBar } from "../components/ProgressBar";
 
-const CIRCUIT_NAME = "twitter";
+const CIRCUIT_NAME = "activity";
 
 export const MainPage: React.FC<{}> = (props) => {
   const { address } = useAccount();
@@ -173,7 +173,7 @@ export const MainPage: React.FC<{}> = (props) => {
         />
       )}
       <div className="title">
-        <Header>Proof of Twitter: ZK Email Demo</Header>
+        <Header>Proof of Activity: ZK Email</Header>
       </div>
 
       <Col
@@ -184,58 +184,29 @@ export const MainPage: React.FC<{}> = (props) => {
           marginBottom: "2rem",
         }}
       >
-        <span style={{ color: "rgba(255, 255, 255, 0.7)" }}>
-          Welcome to a demo page for ZK-Email technology.{" "}
-          <a href="https://github.com/zk-email-verify/zk-email-verify/">
-            Our library
-          </a>{" "}
-          will allow you to generate zero knowledge proofs proving you received
-          some email and mask out any private data, without trusting our server
-          to keep your privacy. This demo is just one use case that lets you
-          prove you own a Twitter username on-chain, by verifying confirmation
-          emails (and their normally-hidden headers) from Twitter.
-          Visit <a href="https://prove.email/blog/zkemail">our blog</a>{" "}or{" "}
-          <a href="https://prove.email">website</a>{" "}to learn more about ZK Email,
-          and find the technical details on how this demo is built{" "}
-          <a href="https://prove.email/blog/twitter">here</a>. 
-          <br />
-          <br />
-          If you wish to generate a ZK proof of Twitter badge (NFT), you must:
-        </span>
         <NumberedStep step={1}>
-          Send yourself a{" "}
-          <a
-            href="https://twitter.com/account/begin_password_reset"
-            target="_blank"
-            rel="noreferrer"
-          >
-            password reset email
-          </a>{" "}
-          from Twitter. (Reminder: Twitter name with emoji might fail to pass DKIM verification)
-        </NumberedStep>
-        <NumberedStep step={2}>
-          In your inbox, find the email from Twitter and click the three dot
+          In your inbox, find the email from DEX office and click the three dot
           menu, then "Show original" then "Copy to clipboard". If on Outlook,
           download the original email as .eml and copy it instead.
         </NumberedStep>
-        <NumberedStep step={3}>
+        <NumberedStep step={2}>
           Copy paste or drop that into the box below. Note that we cannot use
           this to phish you: we do not know your password, and we never get this
           email info because we have no server at all. We are actively searching
           for a less sketchy email.
         </NumberedStep>
-        <NumberedStep step={4}>
+        <NumberedStep step={3}>
           Paste in your sending Ethereum address. This ensures that no one else
           can "steal" your proof for another account (frontrunning protection!).
         </NumberedStep>
-        <NumberedStep step={5}>
+        <NumberedStep step={4}>
           Click <b>"Prove"</b>. Note it is completely client side and{" "}
           <a href="https://github.com/zkemail/proof-of-twitter/" target="_blank" rel="noreferrer">open source</a>, 
           and no server ever sees your private information.
         </NumberedStep>
-        <NumberedStep step={6}>
-          Click <b>"Verify"</b> and then <b>"Mint Twitter Badge On-Chain"</b>,
-          and approve to mint the NFT badge that proves Twitter ownership! Note
+        <NumberedStep step={5}>
+          Click <b>"Verify"</b> and then <b>"Mint PoA Badge On-Chain"</b>,
+          and approve to mint the NFT badge that proves Activity! Note
           that it is 700K gas right now so only feasible on Sepolia, though we
           intend to reduce this soon.
         </NumberedStep>
@@ -277,12 +248,12 @@ export const MainPage: React.FC<{}> = (props) => {
             onClick={async () => {
               const emailBuffer = rawEmailToBuffer(emailFull); // Cleaned email as buffer
               
-              let input: ITwitterCircuitInputs;
+              let input: IActivityCircuitInputs;
               try {
                 setDisplayMessage("Generating proof...");
                 setStatus("generating-input");
 
-                input = await generateTwitterVerifierCircuitInputs(emailBuffer, ethereumAddress);
+                input = await generateActivityVerifierCircuitInputs(emailBuffer, ethereumAddress);
 
                 console.log("Generated input:", JSON.stringify(input));
               } catch (e) {

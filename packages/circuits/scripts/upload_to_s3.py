@@ -39,7 +39,7 @@ def upload_to_s3(filename, dir=""):
             for file in files:
                 print(root, dir, file)
                 file_path = os.path.join(root, file)
-                relative_path = os.path.relpath(file_path, os.path.join(build_dir, circuit_name))
+                relative_path = os.path.relpath(file_path, os.path.join(build_dir, "activity.circom"))
                 with open(file_path, 'rb') as file_obj:
                     s3_key = os.path.join(commit_hash, relative_path)
                     print(f"Starting upload of {file_path} to {s3_key}...")

@@ -13,7 +13,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 
 const { connectors } = getDefaultWallets({
-  appName: "ZK Email - Twitter Verifier",
+  appName: "ZK Email - Activity Verifier",
   chains: [sepolia],
   projectId: "b68298f4e6597f970ac06be1aea7998d",
 });
